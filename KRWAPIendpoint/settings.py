@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3vd8*g*h=49z46kvy!7zfhjjpmg_-(y()d-3r(dtabh*kk$6=&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,14 +78,25 @@ WSGI_APPLICATION = 'KRWAPIendpoint.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'kasaranireckoning',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#         'USER': 'root',
+#         'PASSWORD': 'toor',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'kasaranireckoning',
-        'HOST': 'localhost',
+        'NAME': 'krwapi$kasaranireckoning',
+        'HOST': 'krwapi.mysql.pythonanywhere-services.com',
         'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': 'toor',
+        'USER': 'krwapi',
+        'PASSWORD': 'toortoor',
     }
 }
 
