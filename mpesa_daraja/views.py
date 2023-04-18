@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django import http
 from django.views import View
-from .models import CompleteTransaction as Payment
+from .models import CompleteTransaction as Payment, Confirmation
 from .serializers import PaymentSerializer, PhoneSerializer
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
@@ -86,11 +86,16 @@ class PaymentViewSet(PermissionsPerMethodMixin, viewsets.ModelViewSet):
             InvoiceNumber = request.data.get('InvoiceNumber')
             OrgAccountBalance = request.data.get('OrgAccountBalance')
             ThirdPartyTransID = request.data.get('ThirdPartyTransID')
-            MSISDN = request.data.get('MSISDN')
+            Msisdn = request.data.get('MSISDN')
             FirstName = request.data.get('FirstName')
             MiddleName = request.data.get('MiddleName')
             LastName = request.data.get('LastName')
 
+            confirmation = Confirmation.objects.create(TransactionType=TransactionType, TransID=TransID, TransTime=TransTime, TransAmount=TransAmount, 
+                                                       BusinessShortCode=BusinessShortCode, BillRefNumber=BillRefNumber, InvoiceNumber=InvoiceNumber, 
+                                                       OrgAccountBalance=OrgAccountBalance, ThirdPartyTransID=ThirdPartyTransID, MSISDN=Msisdn, FirstName=FirstName, 
+                                                       MiddleName=MiddleName, LastName=LastName)
+            confirmation.save()
             
         context = {
             "ResultCode": 0,
