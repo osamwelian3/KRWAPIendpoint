@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'api',
     'members',
+    'mpesa_daraja',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +154,12 @@ STATIC_ROOT = Path.joinpath(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Daraja Credentials
+Consumer_Key = 'fg79A5OfeGHfdA3Nv27Y9kDIAcRHfbML'
+Consumer_Secret = 'yPuwhn7b5esmdZe1'
+BusinessShortCode = 174379
+Passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+TransactionType = 'CustomerPayBillOnline'
+PartyB = 174379
+AccountReference = 'Kasarani Reckoning Welfare'

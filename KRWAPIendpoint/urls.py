@@ -23,7 +23,8 @@ from drf_yasg import openapi
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('gettoken/', obtain_auth_token),
-    path('auth/', include('api.urls'))
+    path('auth/', include('api.urls')),
+    path('payment/', include('mpesa_daraja.urls')),
 ]
 
 schema_view = get_schema_view(
