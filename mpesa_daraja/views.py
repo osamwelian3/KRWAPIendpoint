@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django import http
 from django.views import View
 from .models import CompleteTransaction as Payment, Confirmation
-from .serializers import PaymentSerializer, PhoneSerializer
+from .serializers import PaymentSerializer, PhoneSerializer, ConfirmationSerializer
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -74,7 +74,7 @@ class PaymentViewSet(PermissionsPerMethodMixin, viewsets.ModelViewSet):
     
     @authentication_classes([])
     @permission_classes((AllowAny, ))
-    @action(detail=False, methods=['post', 'get'])
+    @action(detail=False, methods=['post', 'get'], serializer_class=ConfirmationSerializer)
     def confirmation(self, request, *args, **kwargs):
         if request.method == 'POST':
             TransactionType = request.data.get('TransactionType')
@@ -97,8 +97,9 @@ class PaymentViewSet(PermissionsPerMethodMixin, viewsets.ModelViewSet):
                                                        MiddleName=MiddleName, LastName=LastName)
             confirmation.save()
             
-        context = {
-            "ResultCode": 0,
-            "ResultDesc": "Accepted"
-        }
-        return Response(dict(context))
+            context = {
+                "ResultCode": 0,
+                "ResultDesc": "Accepted"
+            }
+            return Response(dict(context))
+        return Response(ConfirmationSerializer(Confirmation.objects.all(), many=True).data)
