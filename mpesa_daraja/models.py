@@ -49,3 +49,21 @@ class Confirmation(models.Model):
 
     def __str__(self) -> str:
         return f"Transaction of {self.TransAmount} from {self.FirstName} {self.LastName}"
+    
+class Validation(models.Model):
+    TransactionType = models.CharField(max_length=255)
+    TransID = models.CharField(max_length=255)
+    TransTime = models.CharField(max_length=255)
+    TransAmount = models.CharField(max_length=255)
+    BusinessShortCode = models.CharField(max_length=255)
+    BillRefNumber = models.CharField(max_length=255)
+    InvoiceNumber = models.CharField(max_length=255)
+    OrgAccountBalance = models.CharField(max_length=255)
+    ThirdPartyTransID = models.CharField(max_length=255)
+    MSISDN = models.CharField(max_length=255)
+    FirstName = models.CharField(max_length=255)
+    MiddleName = models.CharField(max_length=255)
+    LastName = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return f"Transaction of {self.TransAmount} from {self.FirstName} {self.LastName}"

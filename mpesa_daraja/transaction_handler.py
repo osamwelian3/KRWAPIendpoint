@@ -90,3 +90,21 @@ class Transaction:
         data = json.loads(response.text.encode('utf8'))
         print(data)
         return data
+    
+    def registerConfirmationurls(self):
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + self.get_access_token()
+        }
+
+        payload = {
+            "ShortCode": BusinessShortCode,
+            "ResponseType": "Completed",
+            "ConfirmationURL": "https://krwapi.pythonanywhere.com/payment/confirmation/",
+            "ValidationURL": "https://krwapi.pythonanywhere.com/payment/confirmation/",
+        }
+
+        response = requests.post('https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl', headers = headers, json = payload)
+        data = json.loads(response.text.encode('utf8'))
+        print(data)
+        return data

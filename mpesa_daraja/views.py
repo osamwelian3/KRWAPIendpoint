@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django import http
 from django.views import View
-from .models import CompleteTransaction as Payment, Confirmation
-from .serializers import PaymentSerializer, PhoneSerializer, ConfirmationSerializer
+from .models import CompleteTransaction as Payment, Confirmation, Validation
+from .serializers import PaymentSerializer, PhoneSerializer, ConfirmationSerializer, ValidationSerializer
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -103,3 +103,42 @@ class PaymentViewSet(PermissionsPerMethodMixin, viewsets.ModelViewSet):
             }
             return Response(dict(context))
         return Response(ConfirmationSerializer(Confirmation.objects.all(), many=True).data)
+    
+    @authentication_classes([])
+    @permission_classes((AllowAny, ))
+    @action(detail=False, methods=['post', 'get'], serializer_class=ValidationSerializer)
+    def validation(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            TransactionType = request.data.get('TransactionType')
+            TransID = request.data.get('TransID')
+            TransTime = request.data.get('TransTime')
+            TransAmount = request.data.get('TransAmount')
+            BusinessShortCode = request.data.get('BusinessShortCode')
+            BillRefNumber = request.data.get('BillRefNumber')
+            InvoiceNumber = request.data.get('InvoiceNumber')
+            OrgAccountBalance = request.data.get('OrgAccountBalance')
+            ThirdPartyTransID = request.data.get('ThirdPartyTransID')
+            Msisdn = request.data.get('MSISDN')
+            FirstName = request.data.get('FirstName')
+            MiddleName = request.data.get('MiddleName')
+            LastName = request.data.get('LastName')
+
+            confirmation = Validation.objects.create(TransactionType=TransactionType, TransID=TransID, TransTime=TransTime, TransAmount=TransAmount, 
+                                                       BusinessShortCode=BusinessShortCode, BillRefNumber=BillRefNumber, InvoiceNumber=InvoiceNumber, 
+                                                       OrgAccountBalance=OrgAccountBalance, ThirdPartyTransID=ThirdPartyTransID, MSISDN=Msisdn, FirstName=FirstName, 
+                                                       MiddleName=MiddleName, LastName=LastName)
+            confirmation.save()
+            
+            context = {
+                "ResultCode": 0,
+                "ResultDesc": "Accepted"
+            }
+            return Response(dict(context))
+        return Response(ConfirmationSerializer(Confirmation.objects.all(), many=True).data)
+    
+    @authentication_classes([])
+    @permission_classes((AllowAny, ))
+    @action(detail=False, methods=['post', 'get'])
+    def registerurl(self, request, *args, **kwargs):
+        data = Transaction().registerConfirmationurls()
+        return Response(data)
