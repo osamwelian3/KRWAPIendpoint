@@ -1,1 +1,7 @@
-KRWAPIendpoint/__pycache__/settings.cpython-311.pyc
+.env/
+__pycache__/
+migrations/
+__pycache__/*
+.env/*
+*/__pycache__/*
+.gitignore

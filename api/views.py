@@ -31,4 +31,9 @@ class UserViewSet(PermissionsPerMethodMixin, viewsets.ModelViewSet):
                 user.save()
                 return resp
         return resp
+    
+    @action(detail=False, methods=['GET'], serializer_class=UserSerializer)
+    def userdetail(self, request, *args, **kwargs):
+        user = UserSerializer(User.objects.get(id=request.user.id)).data
+        return Response(user)
 
