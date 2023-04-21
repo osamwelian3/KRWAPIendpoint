@@ -55,6 +55,7 @@ class PaymentViewSet(PermissionsPerMethodMixin, viewsets.ModelViewSet):
     @permission_classes((AllowAny, ))
     @action(detail=False, methods=['post', 'get'])
     def callback(self, request, *args, **kwargs):
+        print(request.data)
         if request.method == 'POST':
             merchantRequestID = request.data.get('Body').get('stkCallback').get('MerchantRequestID')
             checkoutRequestID = request.data.get('Body').get('stkCallback').get('CheckoutRequestID')

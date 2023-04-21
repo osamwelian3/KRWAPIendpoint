@@ -61,7 +61,7 @@ class Transaction:
             "PartyA": int(phone),
             "PartyB": BusinessShortCode,
             "PhoneNumber": int(phone),
-            "CallBackURL": "http://krwapi.pythonanywhere.com/payment/callback/",
+            "CallBackURL": "https://krwapi.pythonanywhere.com/payment/callback/",
             "AccountReference": accountReference,
             "TransactionDesc": transactionDesc 
         }
