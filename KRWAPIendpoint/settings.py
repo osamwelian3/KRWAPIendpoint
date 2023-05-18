@@ -156,8 +156,8 @@ STATIC_ROOT = Path.joinpath(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Daraja Credentials
-Consumer_Key = 'fg79A5OfeGHfdA3Nv27Y9kDIAcRHfbML'
-Consumer_Secret = 'yPuwhn7b5esmdZe1'
+Consumer_Key = 'E5PrTtvsdC0FEk1VBAGHnWiEeIaEzexh'
+Consumer_Secret = 'xOMTguMhaWKhQSzU'
 BusinessShortCode = 174379
 Passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
 TransactionType = 'CustomerPayBillOnline'
