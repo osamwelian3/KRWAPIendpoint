@@ -9,7 +9,7 @@ class PaymentSerializer(serializers.ModelSerializer):
 class PhoneSerializer(serializers.ModelSerializer):
     class Meta:
         model=Payment
-        fields=['phone_number']
+        fields=['phoneNumber']
 
 class ConfirmationSerializer(serializers.ModelSerializer):
     class Meta:
